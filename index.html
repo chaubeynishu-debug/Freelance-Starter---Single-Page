@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Freelance Web Dev — Single Page</title>
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--muted:#9aa4b2;--accent:#60a5fa;--glass:rgba(255,255,255,0.04)}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;color:#e6eef6;background:linear-gradient(180deg,#071026 0%,#081226 100%);-webkit-font-smoothing:antialiased}
+    .container{max-width:1000px;margin:28px auto;padding:0 18px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:grid;place-items:center;color:#072033;font-weight:700}
+    nav{display:flex;gap:12px}
+    nav a{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:8px;font-weight:600}
+    nav a:hover{color:#fff;background:var(--glass)}
+    .btn{background:var(--accent);color:#052033;padding:10px 12px;border-radius:8px;font-weight:700;text-decoration:none}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:center;margin-top:28px}
+    .card{background:var(--card);padding:20px;border-radius:14px;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+    h1{margin:0 0 8px;font-size:28px}
+    p.lead{margin:0;color:var(--muted)}
+
+    /* Quick features */
+    .features{display:flex;gap:12px;margin-top:18px}
+    .feature{flex:1;padding:16px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);}
+    .feature h3{margin:0 0 8px;font-size:14px}
+    .projects{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+    .project{padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);cursor:pointer}
+    .project h4{margin:0 0 6px;font-size:13px}
+    .muted{color:var(--muted);font-size:13px}
+
+    /* Contact */
+    form{display:flex;flex-direction:column;gap:8px}
+    input,textarea{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px;border-radius:8px;color:#e6eef6}
+    input::placeholder,textarea::placeholder{color:var(--muted)}
+    .row{display:flex;gap:8px}
+
+    footer{margin:28px 0;color:var(--muted);font-size:13px}
+
+    /* Responsive */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .projects{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:560px){
+      nav{display:none}
+      .projects{grid-template-columns:1fr}
+      .container{padding:12px}
+    }
+
+    /* small helpers */
+    .center{display:grid;place-items:center}
+    .small{font-size:13px}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">FC</div>
+        <div>
+          <div style="font-weight:800">FreelanceCoder</div>
+          <div class="small muted">Web developer — HTML/CSS/JS</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <a class="btn" id="downloadBtn">Download</a>
+      </nav>
+      <div class="center" style="gap:8px">
+        <button id="menuBtn" style="display:none">Menu</button>
+      </div>
+    </header>
+
+    <main class="hero">
+      <section class="card">
+        <h1>Build clean, fast websites — <span style="color:var(--accent)">for clients</span></h1>
+        <p class="lead">Simple, responsive landing pages, small business sites, portfolios — delivered quickly so you can bill clients and scale.</p>
+
+        <div class="features">
+          <div class="feature">
+            <h3>Responsive</h3>
+            <div class="muted">Mobile-first layouts that look good everywhere.</div>
+          </div>
+          <div class="feature">
+            <h3>Optimized</h3>
+            <div class="muted">Small bundle, fast load — clients love it.</div>
+          </div>
+          <div class="feature">
+            <h3>Easy edits</h3>
+            <div class="muted">Clean code so you (or the client) can update later.</div>
+          </div>
+        </div>
+
+        <div style="margin-top:16px;display:flex;gap:10px">
+          <a class="btn" href="#contact">Hire me</a>
+          <a class="small muted" href="#projects">See examples →</a>
+        </div>
+
+        <div style="margin-top:18px">
+          <div style="font-weight:700;margin-bottom:8px">Why clients pick me</div>
+          <ul class="muted" style="margin:0;padding-left:18px">
+            <li>Fixed-price quotes</li>
+            <li>2–3 day turnaround for small sites</li>
+            <li>Clean responsive code + deployment help</li>
+          </ul>
+        </div>
+      </section>
+
+      <aside class="card">
+        <h3 style="margin-top:0">Quick Portfolio</h3>
+        <div class="projects" id="projects">
+          <div class="project" onclick="openProject(1)">
+            <h4>Restaurant Landing</h4>
+            <div class="muted">HTML/CSS, responsive, menu modal</div>
+          </div>
+          <div class="project" onclick="openProject(2)">
+            <h4>Portfolio</h4>
+            <div class="muted">Filterable projects, contact CTA</div>
+          </div>
+          <div class="project" onclick="openProject(3)">
+            <h4>E-commerce mock</h4>
+            <div class="muted">Product grid, simple cart UI</div>
+          </div>
+        </div>
+
+        <div style="margin-top:12px">
+          <div style="font-weight:700">Contact</div>
+          <div class="muted small">example@youremail.com</div>
+          <div class="muted small" style="margin-top:6px">₹1500 starting — landing pages</div>
+        </div>
+      </aside>
+    </main>
+
+    <section class="card" style="margin-top:18px" id="about">
+      <h2 style="margin-top:0">About / Skills</h2>
+      <div class="row" style="margin-top:8px">
+        <div style="flex:1">
+          <p class="muted">I build responsive websites using plain HTML, CSS and JavaScript. I also integrate deployments on Netlify / Vercel and connect simple contact forms with email services.</p>
+          <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+            <div class="feature small">HTML</div>
+            <div class="feature small">CSS</div>
+            <div class="feature small">Vanilla JS</div>
+            <div class="feature small">Responsive</div>
+            <div class="feature small">Netlify deploy</div>
+          </div>
+        </div>
+        <div style="width:220px">
+          <div class="card" style="padding:12px">
+            <div style="font-weight:800">Price samples</div>
+            <div class="muted small">Landing page — ₹1,500</div>
+            <div class="muted small">Small business site — ₹3,500</div>
+            <div class="muted small">Portfolio — ₹2,000</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="contact" style="margin-top:18px">
+      <h2 style="margin-top:0">Contact / Quick Quote</h2>
+      <form id="contactForm">
+        <input id="name" placeholder="Your name" required />
+        <input id="email" placeholder="Email" required />
+        <textarea id="message" placeholder="What do you need? (brief)" rows="4" required></textarea>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button type="submit" class="btn">Send</button>
+          <div id="formMsg" class="muted small"></div>
+        </div>
+      </form>
+    </section>
+
+    <footer class="center">
+      <div class="muted">Made with ❤️ — Save this file as <code>index.html</code> and open in browser. Need changes? Bol de.</div>
+    </footer>
+  </div>
+
+  <script>
+    // Download button: save current page as HTML file
+    document.getElementById('downloadBtn').addEventListener('click',()=>{
+      const blob = new Blob([document.documentElement.outerHTML],{type:'text/html'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'freelance_starter.html';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+
+    // Simple project modal (demo) -> opens alert with basic description
+    function openProject(id){
+      const data = {
+        1:{title:'Restaurant Landing',desc:'Responsive single-page for restaurant with menu modal and reservation CTA.'},
+        2:{title:'Portfolio',desc:'Personal portfolio with project sections and contact form integration.'},
+        3:{title:'E-commerce mock',desc:'Product grid, quick add-to-cart demo and checkout mock.'}
+      };
+      alert(data[id].title + "\n\n" + data[id].desc + "\n\nWant this exact template for a client? Tell me and I will customize it.");
+    }
+
+    // Form validation + demo submit
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', e=>{
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const msg = document.getElementById('message').value.trim();
+      const formMsg = document.getElementById('formMsg');
+
+      if(!name || !email || !msg){ formMsg.textContent = 'Please fill all fields.'; return; }
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ formMsg.textContent = 'Email invalid.'; return; }
+
+      formMsg.textContent = 'Sending...';
+      // Demo: simulate submit
+      setTimeout(()=>{
+        formMsg.textContent = 'Message sent! I will reply on your email (demo).';
+        form.reset();
+      },900);
+    });
+  </script>
+</body>
+</html>
